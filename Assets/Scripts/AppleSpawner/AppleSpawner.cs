@@ -7,6 +7,7 @@ public class AppleSpawner : ObjectPooling<GameObject>
     [SerializeField] private const float MaxRangeForXAxis = 2.4f;
     [SerializeField] private const float MinRangeForYAxis = 0f;
     [SerializeField] private const float MaxRangeForYAxis = 3f;
+    
     void Start()
     {
         ObjectPool();
