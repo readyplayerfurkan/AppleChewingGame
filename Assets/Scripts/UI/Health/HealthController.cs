@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class HealthController : MonoBehaviour
 {
     [SerializeField] private Slider healthBar;
+    [FormerlySerializedAs("playerHealthData")] [SerializeField] private DataContainer dataContainer;
 
     private void Start()
     {
@@ -17,7 +19,8 @@ public class HealthController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
-            healthBar.value -= 0.002f;
+            dataContainer.playerHealth -= 0.002f;
+            healthBar.value = dataContainer.playerHealth;
 
             if (healthBar.value == 0)
                 break;

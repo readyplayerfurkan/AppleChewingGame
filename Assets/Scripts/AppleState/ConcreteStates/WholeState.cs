@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class WholeState : AppleState
 {
+    private AppleContext _context;
+
+    public WholeState(AppleContext context)
+        => _context = context;
 
     public override void ChewApple()
     {
-        throw new System.NotImplementedException();
+        _context.dataContainer.playerHealth += 0.2f;
+        _context.SetChewedState();
     }
 
     public override void ClickToApple()

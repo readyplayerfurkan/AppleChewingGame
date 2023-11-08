@@ -8,15 +8,21 @@ public class AppleContext : MonoBehaviour
     private AppleState rottenState;
 
     private AppleState currentState;
+    public DataContainer dataContainer;
 
     public AppleContext()
     {
-        growingState = new GrowingState();
-        wholeState = new WholeState();
+        growingState = new GrowingState(this);
+        wholeState = new WholeState(this);
         chewedState = new ChewedState();
         rottenState = new RottenState();
 
         currentState = growingState;
+    }
+
+    private void OnEnable()
+    {
+        currentState.GrowApple();
     }
 
     #region StateChangeMethods
