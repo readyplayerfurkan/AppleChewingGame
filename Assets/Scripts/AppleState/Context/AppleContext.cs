@@ -14,8 +14,8 @@ public class AppleContext : MonoBehaviour
     private bool isAppleWhole;
     private bool isAppleOnTheGround;
 
-    public AppleState CurrentState { get; private set; }
-    
+    public AppleState CurrentState => currentState;
+
     public bool IsAppleWhole
     {
         get => isAppleWhole;
