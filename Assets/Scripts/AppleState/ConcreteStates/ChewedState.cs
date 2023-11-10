@@ -1,4 +1,3 @@
-
 public class ChewedState : AppleState
 {
     private AppleContext _context;
@@ -9,11 +8,6 @@ public class ChewedState : AppleState
     public override void ChewApple()
     {
         throw new System.NotImplementedException();
-    }
-
-    public override void ClickToApple(AppleContext currentClickedApple)
-    {
-        _context.dataContainer.ClickedApple = currentClickedApple;
     }
 
     public override void GrowApple()

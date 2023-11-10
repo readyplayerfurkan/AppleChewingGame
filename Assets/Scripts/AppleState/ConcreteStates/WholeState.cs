@@ -14,11 +14,6 @@ public class WholeState : AppleState
         _context.SetChewedState();
     }
 
-    public override void ClickToApple(AppleContext currentClickedApple)
-    {
-        _context.dataContainer.ClickedApple = currentClickedApple;
-    }
-
     public override void GrowApple()
         => Debug.Log("Apple is already whole.");
 

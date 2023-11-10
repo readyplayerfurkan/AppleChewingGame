@@ -14,11 +14,6 @@ public class GrowingState : AppleState
         _context.SetChewedState();
     }
 
-    public override void ClickToApple(AppleContext currentClickedApple)
-    {
-        _context.dataContainer.ClickedApple = currentClickedApple;
-    }
-
     public override void GrowApple()
     {
         _context.StartCoroutine(AppleGrowingSequence());

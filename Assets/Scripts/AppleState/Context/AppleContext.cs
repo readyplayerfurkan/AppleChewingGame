@@ -67,9 +67,6 @@ public class AppleContext : MonoBehaviour
     public void ChewApple()
         => currentState.ChewApple();
 
-    public void ClickToApple()
-        => currentState.ClickToApple(this);
-
     public void GrowApple()
         => currentState.GrowApple();
 
