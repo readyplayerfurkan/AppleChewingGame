@@ -2,36 +2,57 @@ using UnityEngine;
 
 public class AppleContext : MonoBehaviour
 {
+    [Header("States")]
     private AppleState growingState;
     private AppleState wholeState;
     private AppleState chewedState;
     private AppleState rottenState;
 
+    [Header("Local Variables")]
     private AppleState currentState;
     public DataContainer dataContainer;
+    private bool isAppleWhole;
+    private bool isAppleOnTheGround;
 
-    public AppleContext()
+    public AppleState CurrentState { get; private set; }
+    
+    public bool IsAppleWhole
+    {
+        get => isAppleWhole;
+        set => isAppleWhole = value;
+    }
+
+    public bool IsAppleOnTheGround
+    {
+        get => isAppleOnTheGround;
+        set => isAppleOnTheGround = value;
+    }
+
+    private void Awake()
     {
         growingState = new GrowingState(this);
         wholeState = new WholeState(this);
-        chewedState = new ChewedState();
-        rottenState = new RottenState();
+        chewedState = new ChewedState(this);
+        rottenState = new RottenState(this);
 
         currentState = growingState;
     }
 
     private void OnEnable()
     {
-        currentState.GrowApple();
+        GrowApple();
     }
 
     #region StateChangeMethods
 
     public void SetGrowingState()
         => currentState = growingState;
-    
+
     public void SetWholeState()
-        => currentState = wholeState;
+    {
+        currentState = wholeState;
+        FallApple();
+    }
     
     public void SetChewedState()
         => currentState = chewedState;
@@ -47,7 +68,7 @@ public class AppleContext : MonoBehaviour
         => currentState.ChewApple();
 
     public void ClickToApple()
-        => currentState.ClickToApple();
+        => currentState.ClickToApple(this);
 
     public void GrowApple()
         => currentState.GrowApple();
