@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GrowingState : AppleState
@@ -11,33 +10,33 @@ public class GrowingState : AppleState
     
     public override void ChewApple()
     {
-        throw new System.NotImplementedException();
+        _context.dataContainer.playerHealth += 0.1f;
+        _context.SetChewedState();
     }
 
-    public override void ClickToApple()
+    public override void ClickToApple(AppleContext currentClickedApple)
     {
-        throw new System.NotImplementedException();
+        _context.dataContainer.ClickedApple = currentClickedApple;
     }
 
     public override void GrowApple()
     {
-        StartCoroutine(AppleGrowingSequance());
+        _context.StartCoroutine(AppleGrowingSequence());
     }
 
     public override void FallApple()
-    {
-        throw new System.NotImplementedException();
-    }
+        => Debug.Log("Apple is not whole.");
     
-    private IEnumerator AppleGrowingSequance()
+    private IEnumerator AppleGrowingSequence()
     {
-        while (true)
+        while (!_context.IsAppleWhole)
         {
-            transform.localScale += _context.dataContainer.appleGrowPercent;
-            yield return new WaitForSeconds(1f);
+            _context.transform.localScale += _context.dataContainer.appleGrowPercent;
+            
+            if (_context.transform.localScale == _context.dataContainer.appleWholeValue) 
+                _context.IsAppleWhole = true;
 
-            if (transform.localScale == Vector3.one)
-                break;
+            yield return new WaitForSeconds(1f);
         }
         _context.SetWholeState();
     }

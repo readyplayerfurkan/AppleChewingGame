@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WholeState : AppleState
@@ -11,22 +10,36 @@ public class WholeState : AppleState
 
     public override void ChewApple()
     {
-        _context.dataContainer.playerHealth += 0.2f;
+        _context.dataContainer.playerHealth += 0.25f;
         _context.SetChewedState();
     }
 
-    public override void ClickToApple()
+    public override void ClickToApple(AppleContext currentClickedApple)
     {
-        throw new System.NotImplementedException();
+        _context.dataContainer.ClickedApple = currentClickedApple;
     }
 
     public override void GrowApple()
-    {
-        throw new System.NotImplementedException();
-    }
+        => Debug.Log("Apple is already whole.");
 
     public override void FallApple()
     {
-        throw new System.NotImplementedException();
+        _context.StartCoroutine(AppleFallingSequence());
+    }
+
+    private IEnumerator AppleFallingSequence()
+    {
+        while (!_context.IsAppleOnTheGround)
+        {
+            _context.transform.Translate(_context.dataContainer.appleFallPercent);
+
+            yield return new WaitForSeconds(0.1f);
+
+            if (_context.transform.position.y <= _context.dataContainer.groundBorder)
+                _context.IsAppleOnTheGround = true;
+        }
+
+        yield return new WaitForSeconds(10f);
+        _context.SetRottenState();
     }
 }

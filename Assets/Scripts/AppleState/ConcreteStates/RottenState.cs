@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class RottenState : AppleState
 {
+    private AppleContext _context;
+
+    public RottenState(AppleContext context)
+        => _context = context;
+    
     public override void ChewApple()
     {
         throw new System.NotImplementedException();
     }
 
-    public override void ClickToApple()
+    public override void ClickToApple(AppleContext currentClickedApple)
     {
-        throw new System.NotImplementedException();
+        _context.dataContainer.ClickedApple = currentClickedApple;
     }
 
     public override void GrowApple()
