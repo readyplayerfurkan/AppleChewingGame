@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d291056f879c32143ad5897cefedaa70, type: 3}
   m_Name: DataContainer
   m_EditorClassIdentifier: 
-  playerHealth: 1
+  playerHealth: 0.24200591
+  groundBorder: -3
+  appleFallPercent: {x: 0, y: -0.05, z: 0}
   appleGrowPercent: {x: 0.1, y: 0.1, z: 0.1}
+  appleWholeValue: {x: 0.5, y: 0.5, z: 0.5}
+  currentStateText: {fileID: 6115553903070808171, guid: 83e6228dc4686b54c9de71ac425e0599, type: 3}
