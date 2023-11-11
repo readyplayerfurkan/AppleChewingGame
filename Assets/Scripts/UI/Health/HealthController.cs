@@ -1,16 +1,15 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class HealthController : MonoBehaviour
 {
     [SerializeField] private Slider healthBar;
-    [FormerlySerializedAs("playerHealthData")] [SerializeField] private DataContainer dataContainer;
+    [SerializeField] private DataContainer dataContainer;
 
     private void Start()
     {
+        dataContainer.playerHealth = 1;
         StartCoroutine(DecreaseHealth());
     }
 

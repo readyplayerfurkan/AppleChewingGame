@@ -56,9 +56,12 @@ public class AppleContext : MonoBehaviour
     
     public void SetChewedState()
         => currentState = chewedState;
-    
+
     public void SetRottenState()
-        => currentState = rottenState;
+    {
+        currentState = rottenState;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f);
+    }
 
     #endregion
 
