@@ -9,15 +9,32 @@ public class StateTextController : MonoBehaviour
     public void OnAppleClicked(GameObject apple)
     {
         clickedApple = apple.GetComponent<AppleContext>();
-        Debug.Log(clickedApple.CurrentState);
-        
+
+        ChangedTextColor(clickedApple);
+        ChangeTextContent(clickedApple);
+    }
+
+    private void ChangedTextColor(AppleContext clickedApple)
+    {
         currentStateText.color = clickedApple.CurrentState.ToString() switch
         {
-            "GrowingState" => new Color(236, 144, 144),
-            "WholeState" => new Color(197, 31, 31),
-            "ChewedState" => new Color(150, 204, 32),
-            "RottenState" => new Color(0, 0, 0),
+            "GrowingState" => new Color(236f / 255f, 144f / 255f, 144f / 255f),
+            "WholeState" => new Color(197f / 255f, 31f / 255f, 31f / 255f),
+            "ChewedState" => new Color(150f / 255f, 204f / 255f, 32f / 255f),
+            "RottenState" => new Color(0f, 0f, 0f),
             _ => currentStateText.color
+        };
+    }
+
+    private void ChangeTextContent(AppleContext clickedApple)
+    {
+        currentStateText.text = clickedApple.CurrentState.ToString() switch
+        {
+            "GrowingState" => "Growing State",
+            "WholeState" => "Whole State",
+            "ChewedState" => "Chewed State",
+            "RottenState" => "Rotten State",
+            _ => currentStateText.text
         };
     }
 }
