@@ -20,7 +20,7 @@ public class AppleSpawner : ObjectPooling<GameObject>
         {
             itemInstantiate = GetItem();
             GetRandomPositionForApple(itemInstantiate.transform);
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(10f);
         }
     }
 
