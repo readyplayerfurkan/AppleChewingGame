@@ -7,7 +7,16 @@ public class GrowingState : AppleState
 
     public GrowingState(AppleContext context)
         => _context = context;
-    
+
+    public override void ApplyStateChangingOptions()
+    {
+        _context.IsAppleWhole = false;
+        _context.IsAppleOnTheGround = false;
+        _context.transform.localScale = _context.dataContainer.appleFirstScale;
+        _context.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f);
+        GrowApple();
+    }
+
     public override void ChewApple()
     {
         _context.dataContainer.playerHealth += 0.1f;

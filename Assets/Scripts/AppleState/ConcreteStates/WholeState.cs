@@ -8,6 +8,11 @@ public class WholeState : AppleState
     public WholeState(AppleContext context)
         => _context = context;
 
+    public override void ApplyStateChangingOptions()
+    {
+        FallApple();
+    }
+
     public override void ChewApple()
     {
         _context.dataContainer.playerHealth += 0.25f;

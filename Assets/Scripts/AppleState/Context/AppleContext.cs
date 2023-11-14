@@ -14,6 +14,10 @@ public class AppleContext : MonoBehaviour
     private bool isAppleWhole;
     private bool isAppleOnTheGround;
 
+    [Header("Game Events")] 
+    [SerializeField] private GameObjectGenericGameEvent onAppleRotten;
+    [SerializeField] private GameObjectGenericGameEvent onAppleChewed;
+
     public AppleState CurrentState => currentState;
 
     public bool IsAppleWhole
@@ -40,32 +44,43 @@ public class AppleContext : MonoBehaviour
 
     private void OnEnable()
     {
-        GrowApple();
+        SetGrowingState();
     }
 
     #region StateChangeMethods
 
     public void SetGrowingState()
-        => currentState = growingState;
+    {
+        currentState = growingState;
+        ApplyStateChangingOptions();
+    }
 
     public void SetWholeState()
     {
         currentState = wholeState;
-        FallApple();
+        ApplyStateChangingOptions();
     }
-    
+
     public void SetChewedState()
-        => currentState = chewedState;
+    {
+        currentState = chewedState;
+        ApplyStateChangingOptions();
+        onAppleChewed.Raise(gameObject);
+    }
 
     public void SetRottenState()
     {
         currentState = rottenState;
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f);
+        ApplyStateChangingOptions();
+        onAppleRotten.Raise(gameObject);
     }
 
     #endregion
 
     #region StateMethods
+
+    public void ApplyStateChangingOptions()
+        => currentState.ApplyStateChangingOptions();
 
     public void ChewApple()
         => currentState.ChewApple();
