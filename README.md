@@ -13,3 +13,5 @@ If you chew an apple its whole state, you gain a lot of health.
 If you chew an apple its chewed state, you gain no health.
 
 If you chew an apple its rotten state, you lose health.
+
+Game Link : https://readyplayerfurkan.itch.io/apple-chewing-game
