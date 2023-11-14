@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataContainer: {fileID: 11400000, guid: 2f71f01b652d3984eb73e5a0ce175b65, type: 2}
+  onAppleRotten: {fileID: 11400000, guid: 7a4c779204690184995d163269b61559, type: 2}
+  onAppleChewed: {fileID: 11400000, guid: fdc6fe445d145d14cbe478b4b4cacc61, type: 2}
 --- !u!58 &6679684458837775063
 CircleCollider2D:
   m_ObjectHideFlags: 0
