@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class AppleSpawner : ObjectPooling<GameObject>
 {
-    [SerializeField] private const float MinRangeForXAxis = -1.5f;
-    [SerializeField] private const float MaxRangeForXAxis = 2.4f;
-    [SerializeField] private const float MinRangeForYAxis = 0f;
-    [SerializeField] private const float MaxRangeForYAxis = 3f;
+    private const float MinRangeForXAxis = -1.7f;
+    private const float MaxRangeForXAxis = 2.7f;
+    private const float MinRangeForYAxis = 0f;
+    private const float MaxRangeForYAxis = 3f;
+
+    private const float appleSpawnInterval = 7.5f;
     
     void Start()
     {
@@ -20,7 +22,7 @@ public class AppleSpawner : ObjectPooling<GameObject>
         {
             itemInstantiate = GetItem();
             GetRandomPositionForApple(itemInstantiate.transform);
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(appleSpawnInterval);
         }
     }
 
@@ -31,4 +33,19 @@ public class AppleSpawner : ObjectPooling<GameObject>
 
         appleTransform.position = new Vector3(randomXCoordinate, randomYCoordinate);
     }
-}
+    
+    private IEnumerator ReleaseItemFromScene(GameObject chewedApple)
+    {
+        yield return new WaitForSeconds(10f);
+        ReleaseItem(chewedApple);
+    }
+
+    public void OnAppleChewed(GameObject chewedApple)
+    {
+        StartCoroutine(ReleaseItemFromScene(chewedApple));
+    }
+    
+    public void OnAppleRotten(GameObject rottenApple)
+    {
+        StartCoroutine(ReleaseItemFromScene(rottenApple));
+    } }
