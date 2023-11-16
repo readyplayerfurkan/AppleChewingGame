@@ -39,8 +39,12 @@ public class DataContainer : ScriptableObject
         get => _playerHealth;
         set
         {
-            if (_playerHealth >= 1) return;
-
+            if (_playerHealth > 1)
+            {
+                _playerHealth = 1;
+                return;
+            }
+            
             _playerHealth = value;
         }
     }
