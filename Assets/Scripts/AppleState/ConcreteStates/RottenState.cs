@@ -19,12 +19,8 @@ public class RottenState : AppleState
     }
 
     public override void GrowApple()
-    {
-        
-    }
+        => Debug.Log("Apple is rotten, sorry. :/");
 
     public override void FallApple()
-    {
-        
-    }
+        => Debug.Log("Apple is rotten, sorry. :/");
 }

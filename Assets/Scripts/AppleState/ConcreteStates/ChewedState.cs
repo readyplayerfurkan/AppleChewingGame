@@ -13,17 +13,11 @@ public class ChewedState : AppleState
     }
 
     public override void ChewApple()
-    {
-
-    }
-
+        => Debug.Log("Apple is already chewed.");
+    
     public override void GrowApple()
-    {
-
-    }
-
+        => Debug.Log("Apple cannot grow while it is chewed.");
+    
     public override void FallApple()
-    {
-
-    }
+        => Debug.Log("Apple cannot fall while it is chewed.");
 }
