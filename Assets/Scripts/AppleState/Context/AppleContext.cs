@@ -13,6 +13,7 @@ public class AppleContext : MonoBehaviour
     public DataContainer dataContainer;
     private bool isAppleWhole;
     private bool isAppleOnTheGround;
+    public GameObject appleCursor;
 
     [Header("Game Events")] 
     [SerializeField] private GameObjectGenericGameEvent onAppleRotten;
