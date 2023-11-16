@@ -9,7 +9,7 @@ public class HealthController : MonoBehaviour
 
     private void Start()
     {
-        dataContainer.playerHealth = 1;
+        dataContainer.PlayerHealth = 1;
         StartCoroutine(DecreaseHealth());
     }
 
@@ -18,11 +18,9 @@ public class HealthController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
-            dataContainer.playerHealth -= 0.002f;
-            healthBar.value = dataContainer.playerHealth;
-
-            if (healthBar.value == 0)
-                break;
+            if (healthBar.value != 0)
+                dataContainer.PlayerHealth -= 0.002f;
+            healthBar.value = dataContainer.PlayerHealth;
         }  
     }
 }

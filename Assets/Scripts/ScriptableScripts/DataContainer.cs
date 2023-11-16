@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class DataContainer : ScriptableObject
 {
-    public float playerHealth = 1f;
+    private float _playerHealth = 1f;
     public float groundBorder = -3f;
     
     public Vector3 appleFallPercent = new Vector3(0, -0.05f, 0);
@@ -31,6 +31,17 @@ public class DataContainer : ScriptableObject
                 isAnAppleSelectedNow = true;
                 _clickedApple.appleCursor.SetActive(true);
             }
+        }
+    }
+
+    public float PlayerHealth
+    {
+        get => _playerHealth;
+        set
+        {
+            if (_playerHealth >= 1) return;
+
+            _playerHealth = value;
         }
     }
 }

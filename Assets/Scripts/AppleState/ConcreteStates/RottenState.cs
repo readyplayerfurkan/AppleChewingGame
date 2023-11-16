@@ -14,7 +14,7 @@ public class RottenState : AppleState
 
     public override void ChewApple()
     {
-        _context.dataContainer.playerHealth -= 0.2f;
+        _context.dataContainer.PlayerHealth -= 0.2f;
         _context.SetChewedState();
     }
 

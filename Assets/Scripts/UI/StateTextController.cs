@@ -6,7 +6,7 @@ public class StateTextController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentStateText;
     private AppleContext clickedApple;
 
-    public void OnAppleClicked(GameObject apple)
+    public void OnAppleClickedOrChewed(GameObject apple)
     {
         clickedApple = apple.GetComponent<AppleContext>();
 

@@ -19,7 +19,7 @@ public class GrowingState : AppleState
 
     public override void ChewApple()
     {
-        _context.dataContainer.playerHealth += 0.1f;
+        _context.dataContainer.PlayerHealth += 0.1f;
         _context.SetChewedState();
     }
 

@@ -15,7 +15,7 @@ public class WholeState : AppleState
 
     public override void ChewApple()
     {
-        _context.dataContainer.playerHealth += 0.25f;
+        _context.dataContainer.PlayerHealth += 0.25f;
         _context.SetChewedState();
     }
 
