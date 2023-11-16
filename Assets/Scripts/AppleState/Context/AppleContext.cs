@@ -3,44 +3,33 @@ using UnityEngine;
 public class AppleContext : MonoBehaviour
 {
     [Header("States")]
-    private AppleState growingState;
-    private AppleState wholeState;
-    private AppleState chewedState;
-    private AppleState rottenState;
+    private AppleState _growingState;
+    private AppleState _wholeState;
+    private AppleState _chewedState;
+    private AppleState _rottenState;
 
     [Header("Local Variables")]
-    private AppleState currentState;
+    private AppleState _currentState;
     public DataContainer dataContainer;
-    private bool isAppleWhole;
-    private bool isAppleOnTheGround;
     public GameObject appleCursor;
 
     [Header("Game Events")] 
     [SerializeField] private GameObjectGenericGameEvent onAppleRotten;
     [SerializeField] private GameObjectGenericGameEvent onAppleChewed;
 
-    public AppleState CurrentState => currentState;
+    public AppleState CurrentState => _currentState;
 
-    public bool IsAppleWhole
-    {
-        get => isAppleWhole;
-        set => isAppleWhole = value;
-    }
-
-    public bool IsAppleOnTheGround
-    {
-        get => isAppleOnTheGround;
-        set => isAppleOnTheGround = value;
-    }
+    public bool IsAppleWhole { get; set; }
+    public bool IsAppleOnTheGround { get; set; }
 
     private void Awake()
     {
-        growingState = new GrowingState(this);
-        wholeState = new WholeState(this);
-        chewedState = new ChewedState(this);
-        rottenState = new RottenState(this);
+        _growingState = new GrowingState(this);
+        _wholeState = new WholeState(this);
+        _chewedState = new ChewedState(this);
+        _rottenState = new RottenState(this);
 
-        currentState = growingState;
+        _currentState = _growingState;
     }
 
     private void OnEnable()
@@ -52,26 +41,26 @@ public class AppleContext : MonoBehaviour
 
     public void SetGrowingState()
     {
-        currentState = growingState;
+        _currentState = _growingState;
         ApplyStateChangingOptions();
     }
 
     public void SetWholeState()
     {
-        currentState = wholeState;
+        _currentState = _wholeState;
         ApplyStateChangingOptions();
     }
 
     public void SetChewedState()
     {
-        currentState = chewedState;
+        _currentState = _chewedState;
         ApplyStateChangingOptions();
         onAppleChewed.Raise(gameObject);
     }
 
     public void SetRottenState()
     {
-        currentState = rottenState;
+        _currentState = _rottenState;
         ApplyStateChangingOptions();
         onAppleRotten.Raise(gameObject);
     }
@@ -81,16 +70,16 @@ public class AppleContext : MonoBehaviour
     #region StateMethods
 
     public void ApplyStateChangingOptions()
-        => currentState.ApplyStateChangingOptions();
+        => _currentState.ApplyStateChangingOptions();
 
     public void ChewApple()
-        => currentState.ChewApple();
+        => _currentState.ChewApple();
 
     public void GrowApple()
-        => currentState.GrowApple();
+        => _currentState.GrowApple();
 
     public void FallApple()
-        => currentState.FallApple();
+        => _currentState.FallApple();
 
     #endregion
 }
