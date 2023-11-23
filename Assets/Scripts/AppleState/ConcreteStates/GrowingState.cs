@@ -4,33 +4,26 @@ using UnityEngine;
 public class GrowingState : AppleState
 {
     private AppleContext _context;
+    private IEnumerator _appleSpawnCoroutine;
 
     public GrowingState(AppleContext context)
         => _context = context;
 
-    public void ApplyStateChangingOptions()
+    public void OnSet()
     {
         _context.IsAppleWhole = false;
         _context.IsAppleOnTheGround = false;
         _context.transform.localScale = _context.DataContainer.appleFirstScale;
         _context.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f);
-        GrowApple();
+        _appleSpawnCoroutine = AppleGrowingSequence();
+        _context.StartCoroutine(_appleSpawnCoroutine);
     }
 
-    public void ChewApple()
+    public void OnUnSet()
     {
-        _context.DataContainer.PlayerHealth += 0.1f;
-        _context.SetChewedState();
+        _context.StopCoroutine(_appleSpawnCoroutine);
     }
 
-    public void GrowApple()
-    {
-        _context.StartCoroutine(AppleGrowingSequence());
-    }
-
-    public void FallApple()
-        => Debug.Log("Apple is not whole.");
-    
     private IEnumerator AppleGrowingSequence()
     {
         while (!_context.IsAppleWhole)
@@ -42,6 +35,12 @@ public class GrowingState : AppleState
 
             yield return new WaitForSeconds(1f);
         }
-        _context.SetWholeState();
+        _context.SwitchState(_context.WholeState);
+    }
+    
+    public void ChewApple()
+    {
+        _context.DataContainer.PlayerHealth += 0.1f;
+        _context.SwitchState(_context.ChewedState);
     }
 }

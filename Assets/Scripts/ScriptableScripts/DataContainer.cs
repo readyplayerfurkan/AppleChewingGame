@@ -48,4 +48,9 @@ public class DataContainer : ScriptableObject
             _playerHealth = value;
         }
     }
+    
+    public void ResetAllValues()
+    {
+        isAnAppleSelectedNow = false;
+    }
 }

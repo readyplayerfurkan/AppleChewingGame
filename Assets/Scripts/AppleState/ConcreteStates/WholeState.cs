@@ -8,23 +8,20 @@ public class WholeState : AppleState
     public WholeState(AppleContext context)
         => _context = context;
 
-    public void ApplyStateChangingOptions()
+    public void OnSet()
     {
-        FallApple();
+        _context.StartCoroutine(AppleFallingSequence());
+    }
+
+    public void OnUnSet()
+    {
+        
     }
 
     public void ChewApple()
     {
         _context.DataContainer.PlayerHealth += 0.25f;
-        _context.SetChewedState();
-    }
-
-    public void GrowApple()
-        => Debug.Log("Apple is already whole.");
-
-    public void FallApple()
-    {
-        _context.StartCoroutine(AppleFallingSequence());
+        _context.SwitchState(_context.ChewedState);
     }
 
     private IEnumerator AppleFallingSequence()
@@ -40,6 +37,6 @@ public class WholeState : AppleState
         }
 
         yield return new WaitForSeconds(10f);
-        _context.SetRottenState();
+        _context.SwitchState(_context.RottenState);
     }
 }

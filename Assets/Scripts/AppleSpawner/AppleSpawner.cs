@@ -48,4 +48,5 @@ public class AppleSpawner : ObjectPooling<GameObject>
     public void OnAppleRotten(GameObject rottenApple)
     {
         StartCoroutine(ReleaseItemFromScene(rottenApple));
-    } }
+    }
+}

@@ -1,8 +1,7 @@
 public interface AppleState
 {
-   void ApplyStateChangingOptions();
+   void OnSet();
+   void OnUnSet();
    void ChewApple();
-   void GrowApple();
-   void FallApple();
 }
 

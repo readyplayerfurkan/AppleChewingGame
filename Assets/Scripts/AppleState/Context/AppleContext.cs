@@ -7,10 +7,15 @@ public class AppleContext : MonoBehaviour
     private AppleState _wholeState;
     private AppleState _chewedState;
     private AppleState _rottenState;
+    
+    public AppleState GrowingState => _growingState;
+    public AppleState WholeState => _wholeState;
+    public AppleState ChewedState => _chewedState;
+    public AppleState RottenState => _rottenState;
 
     [Header("Game Events")] 
-    [SerializeField] private GameObjectGenericGameEvent onAppleRotten;
-    [SerializeField] private GameObjectGenericGameEvent onAppleChewed;
+    public GameObjectGenericGameEvent onAppleRotten;
+    public GameObjectGenericGameEvent onAppleChewed;
 
     [SerializeField] private DataContainer dataContainer;
     [SerializeField] private GameObject appleCursor;
@@ -27,58 +32,17 @@ public class AppleContext : MonoBehaviour
         _wholeState = new WholeState(this);
         _chewedState = new ChewedState(this);
         _rottenState = new RottenState(this);
-
-        CurrentState = _growingState;
     }
 
     private void OnEnable()
     {
-        SetGrowingState();
+        SwitchState(_growingState);
     }
 
-    #region StateChangeMethods
-
-    public void SetGrowingState()
+    public void SwitchState(AppleState state)
     {
-        CurrentState = _growingState;
-        ApplyStateChangingOptions();
+        CurrentState?.OnUnSet();
+        CurrentState = state;
+        CurrentState.OnSet();
     }
-
-    public void SetWholeState()
-    {
-        CurrentState = _wholeState;
-        ApplyStateChangingOptions();
-    }
-
-    public void SetChewedState()
-    {
-        CurrentState = _chewedState;
-        ApplyStateChangingOptions();
-        onAppleChewed.Raise(gameObject);
-    }
-
-    public void SetRottenState()
-    {
-        CurrentState = _rottenState;
-        ApplyStateChangingOptions();
-        onAppleRotten.Raise(gameObject);
-    }
-
-    #endregion
-
-    #region StateMethods
-
-    public void ApplyStateChangingOptions()
-        => CurrentState.ApplyStateChangingOptions();
-
-    public void ChewApple()
-        => CurrentState.ChewApple();
-
-    public void GrowApple()
-        => CurrentState.GrowApple();
-
-    public void FallApple()
-        => CurrentState.FallApple();
-
-    #endregion
 }

@@ -7,20 +7,20 @@ public class RottenState : AppleState
     public RottenState(AppleContext context)
         => _context = context;
 
-    public void ApplyStateChangingOptions()
+    public void OnSet()
     {
         _context.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f);
+        _context.onAppleRotten.Raise(_context.gameObject);
+    }
+
+    public void OnUnSet()
+    {
+        
     }
 
     public void ChewApple()
     {
         _context.DataContainer.PlayerHealth -= 0.2f;
-        _context.SetChewedState();
+        _context.SwitchState(_context.ChewedState);
     }
-
-    public void GrowApple()
-        => Debug.Log("Apple is rotten, sorry. :/");
-
-    public void FallApple()
-        => Debug.Log("Apple is rotten, sorry. :/");
 }
