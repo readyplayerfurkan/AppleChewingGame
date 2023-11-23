@@ -30,10 +30,10 @@ public class StateTextController : MonoBehaviour
     {
         currentStateText.text = clickedApple.CurrentState.ToString() switch
         {
-            "GrowingState" => "Growing State",
-            "WholeState" => "Whole State",
-            "ChewedState" => "Chewed State",
-            "RottenState" => "Rotten State",
+            nameof(GrowingState) => "Growing State",
+            nameof(WholeState) => "Whole State",
+            nameof(ChewedState) => "Chewed State",
+            nameof(RottenState) => "Rotten State",
             _ => currentStateText.text
         };
     }
