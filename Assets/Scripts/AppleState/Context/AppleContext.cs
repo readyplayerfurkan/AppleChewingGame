@@ -36,7 +36,7 @@ public class AppleContext : MonoBehaviour
 
     private void OnEnable()
     {
-        SwitchState(_growingState);
+        SwitchState(GrowingState);
     }
 
     public void SwitchState(AppleState state)
