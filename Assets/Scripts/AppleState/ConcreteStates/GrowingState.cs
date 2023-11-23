@@ -8,7 +8,7 @@ public class GrowingState : AppleState
     public GrowingState(AppleContext context)
         => _context = context;
 
-    public override void ApplyStateChangingOptions()
+    public void ApplyStateChangingOptions()
     {
         _context.IsAppleWhole = false;
         _context.IsAppleOnTheGround = false;
@@ -17,18 +17,18 @@ public class GrowingState : AppleState
         GrowApple();
     }
 
-    public override void ChewApple()
+    public void ChewApple()
     {
         _context.dataContainer.PlayerHealth += 0.1f;
         _context.SetChewedState();
     }
 
-    public override void GrowApple()
+    public void GrowApple()
     {
         _context.StartCoroutine(AppleGrowingSequence());
     }
 
-    public override void FallApple()
+    public void FallApple()
         => Debug.Log("Apple is not whole.");
     
     private IEnumerator AppleGrowingSequence()

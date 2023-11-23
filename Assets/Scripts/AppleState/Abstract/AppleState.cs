@@ -1,8 +1,8 @@
-public abstract class AppleState
+public interface AppleState
 {
-   public abstract void ApplyStateChangingOptions();
-   public abstract void ChewApple();
-   public abstract void GrowApple();
-   public abstract void FallApple();
+   void ApplyStateChangingOptions();
+   void ChewApple();
+   void GrowApple();
+   void FallApple();
 }
 

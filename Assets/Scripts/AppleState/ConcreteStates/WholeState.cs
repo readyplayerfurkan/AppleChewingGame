@@ -8,21 +8,21 @@ public class WholeState : AppleState
     public WholeState(AppleContext context)
         => _context = context;
 
-    public override void ApplyStateChangingOptions()
+    public void ApplyStateChangingOptions()
     {
         FallApple();
     }
 
-    public override void ChewApple()
+    public void ChewApple()
     {
         _context.dataContainer.PlayerHealth += 0.25f;
         _context.SetChewedState();
     }
 
-    public override void GrowApple()
+    public void GrowApple()
         => Debug.Log("Apple is already whole.");
 
-    public override void FallApple()
+    public void FallApple()
     {
         _context.StartCoroutine(AppleFallingSequence());
     }
