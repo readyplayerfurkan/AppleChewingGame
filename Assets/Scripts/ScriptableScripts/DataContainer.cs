@@ -21,15 +21,15 @@ public class DataContainer : ScriptableObject
         {
             if (isAnAppleSelectedNow)
             {
-                _clickedApple.appleCursor.SetActive(false);
+                _clickedApple.AppleCursor.SetActive(false);
                 _clickedApple = value;
-                _clickedApple.appleCursor.SetActive(true);
+                _clickedApple.AppleCursor.SetActive(true);
             }
             else
             {
                 _clickedApple = value;
                 isAnAppleSelectedNow = true;
-                _clickedApple.appleCursor.SetActive(true);
+                _clickedApple.AppleCursor.SetActive(true);
             }
         }
     }

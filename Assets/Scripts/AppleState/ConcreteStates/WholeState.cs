@@ -15,7 +15,7 @@ public class WholeState : AppleState
 
     public void ChewApple()
     {
-        _context.dataContainer.PlayerHealth += 0.25f;
+        _context.DataContainer.PlayerHealth += 0.25f;
         _context.SetChewedState();
     }
 
@@ -31,11 +31,11 @@ public class WholeState : AppleState
     {
         while (!_context.IsAppleOnTheGround)
         {
-            _context.transform.Translate(_context.dataContainer.appleFallPercent);
+            _context.transform.Translate(_context.DataContainer.appleFallPercent);
 
             yield return new WaitForSeconds(0.1f);
 
-            if (_context.transform.position.y <= _context.dataContainer.groundBorder)
+            if (_context.transform.position.y <= _context.DataContainer.groundBorder)
                 _context.IsAppleOnTheGround = true;
         }
 

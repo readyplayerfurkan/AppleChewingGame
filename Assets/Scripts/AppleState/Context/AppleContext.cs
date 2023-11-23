@@ -8,17 +8,16 @@ public class AppleContext : MonoBehaviour
     private AppleState _chewedState;
     private AppleState _rottenState;
 
-    [Header("Local Variables")]
-    private AppleState _currentState;
-    public DataContainer dataContainer;
-    public GameObject appleCursor;
-
     [Header("Game Events")] 
     [SerializeField] private GameObjectGenericGameEvent onAppleRotten;
     [SerializeField] private GameObjectGenericGameEvent onAppleChewed;
 
-    public AppleState CurrentState => _currentState;
+    [SerializeField] private DataContainer dataContainer;
+    [SerializeField] private GameObject appleCursor;
 
+    public DataContainer DataContainer => dataContainer;
+    public GameObject AppleCursor => appleCursor;
+    public AppleState CurrentState { get; private set; }
     public bool IsAppleWhole { get; set; }
     public bool IsAppleOnTheGround { get; set; }
 
@@ -29,7 +28,7 @@ public class AppleContext : MonoBehaviour
         _chewedState = new ChewedState(this);
         _rottenState = new RottenState(this);
 
-        _currentState = _growingState;
+        CurrentState = _growingState;
     }
 
     private void OnEnable()
@@ -41,26 +40,26 @@ public class AppleContext : MonoBehaviour
 
     public void SetGrowingState()
     {
-        _currentState = _growingState;
+        CurrentState = _growingState;
         ApplyStateChangingOptions();
     }
 
     public void SetWholeState()
     {
-        _currentState = _wholeState;
+        CurrentState = _wholeState;
         ApplyStateChangingOptions();
     }
 
     public void SetChewedState()
     {
-        _currentState = _chewedState;
+        CurrentState = _chewedState;
         ApplyStateChangingOptions();
         onAppleChewed.Raise(gameObject);
     }
 
     public void SetRottenState()
     {
-        _currentState = _rottenState;
+        CurrentState = _rottenState;
         ApplyStateChangingOptions();
         onAppleRotten.Raise(gameObject);
     }
@@ -70,16 +69,16 @@ public class AppleContext : MonoBehaviour
     #region StateMethods
 
     public void ApplyStateChangingOptions()
-        => _currentState.ApplyStateChangingOptions();
+        => CurrentState.ApplyStateChangingOptions();
 
     public void ChewApple()
-        => _currentState.ChewApple();
+        => CurrentState.ChewApple();
 
     public void GrowApple()
-        => _currentState.GrowApple();
+        => CurrentState.GrowApple();
 
     public void FallApple()
-        => _currentState.FallApple();
+        => CurrentState.FallApple();
 
     #endregion
 }

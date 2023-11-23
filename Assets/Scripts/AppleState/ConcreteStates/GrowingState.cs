@@ -12,14 +12,14 @@ public class GrowingState : AppleState
     {
         _context.IsAppleWhole = false;
         _context.IsAppleOnTheGround = false;
-        _context.transform.localScale = _context.dataContainer.appleFirstScale;
+        _context.transform.localScale = _context.DataContainer.appleFirstScale;
         _context.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f);
         GrowApple();
     }
 
     public void ChewApple()
     {
-        _context.dataContainer.PlayerHealth += 0.1f;
+        _context.DataContainer.PlayerHealth += 0.1f;
         _context.SetChewedState();
     }
 
@@ -35,9 +35,9 @@ public class GrowingState : AppleState
     {
         while (!_context.IsAppleWhole)
         {
-            _context.transform.localScale += _context.dataContainer.appleGrowPercent;
+            _context.transform.localScale += _context.DataContainer.appleGrowPercent;
             
-            if (_context.transform.localScale == _context.dataContainer.appleWholeValue) 
+            if (_context.transform.localScale == _context.DataContainer.appleWholeValue) 
                 _context.IsAppleWhole = true;
 
             yield return new WaitForSeconds(1f);
